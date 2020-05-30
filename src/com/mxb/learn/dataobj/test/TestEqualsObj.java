@@ -3,6 +3,8 @@ package com.mxb.learn.dataobj.test;
 import com.mxb.learn.dataobj.entity.NewUser;
 import com.mxb.learn.dataobj.entity.User;
 
+import java.util.HashSet;
+
 /**
  * className：TestEqualsObj
  * Description：TODO[除了基本数据类型，字符串之外，还有常用obj的对比]
@@ -30,7 +32,7 @@ public class TestEqualsObj {
         System.out.println(user1.equals(user2));//false
 
 
-        System.out.println("-------------------------------");
+        System.out.println("--------------");
 
 
         /**
@@ -42,16 +44,31 @@ public class TestEqualsObj {
         System.out.println(newUser1.equals(newUser2));//false
 
 
-        System.out.println("-------------------------------");
+        System.out.println("---------------");
 
 
         /**
          * 新建两个对象，显然NewUser对象中重写了equals方法，比较的是他们所有的值，userNameh和age相同的时候才认为两个对象相同
          * 下面连个对象UserName和age都相同，所谓返回true
+         * （1）重写了equals方法，为什么必须还要写hacode方法呢？下面我们看看重写了equals但是不重写hashcode方法，
+         *      将NewUser中重写hashcode方法注释掉，底层hashSet存储打印出的结果:
+         *      newUser3.equals(newUser4) true 因为equals重写了，返回true
+         *      newUser3.hashCode() == newUser4.hashCode()，hashcode方法没有重写，两者hanshcode不同,返回false
+         *      userHashSet：[userName:刘德华,age:55, userName:刘德华,age:55] set存储有两个，也就是说在set里面她们存储的还不是相同的
+         * （2）现在我们重写了equals方法，同时放开重写hashcode方法注释，看看打印结果：
+         *      newUser3.equals(newUser4) true 因为equals重写了，返回true
+         *      newUser3.hashCode() == newUser4.hashCode()，也重写了，返回true
+         *      userHashSet:[userName:刘德华,age:55],这时候看到，hashset存储的时候hashcode值相同，set认为她们是同一个对象存储
          */
+        HashSet<NewUser> userHashSet = new HashSet<>();
         NewUser newUser3 = new NewUser("刘德华","55");
         NewUser newUser4 = new NewUser("刘德华","55");
+        userHashSet.add(newUser3);
+        userHashSet.add(newUser4);
         System.out.println(newUser3.equals(newUser4));//true
+        System.out.println(newUser3.hashCode() == newUser4.hashCode());
+        System.out.println(userHashSet);
+
     }
 
 
