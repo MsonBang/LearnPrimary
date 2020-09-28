@@ -1,4 +1,4 @@
-package com.mxb.learn.colleciton.list;
+package com.mxb.learn.collection.list;
 
 import java.util.Iterator;
 import java.util.LinkedList;
