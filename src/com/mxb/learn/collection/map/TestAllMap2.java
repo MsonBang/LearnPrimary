@@ -17,7 +17,6 @@ public class TestAllMap2 {
         //增强for循环使用方便，但性能较差，不适合处理超大量级的数据。
         //迭代器的遍历速度要比增强for循环快很多，是增强for循环的2倍左右。
         //使用entrySet遍历的速度要比keySet快很多，是keySet的1.5倍左右
-
     public static void main(String[] args) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("key1", "value1");
